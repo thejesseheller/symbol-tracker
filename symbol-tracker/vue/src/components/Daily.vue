@@ -40,7 +40,7 @@ export default {
   methods: {
     getAllTracked() {
       DatabaseService.getAllStocks().then(response => {
-        this.mostRecentTimeSeries = response.data;
+        this.mostRecentTimeSeries = response.data;        
       });
     },
     getIntradayInfo(symbol) {      

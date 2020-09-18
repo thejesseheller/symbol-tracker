@@ -1,7 +1,7 @@
 package com.thejessehelller.symboltracker.dao;
 
 import com.thejessehelller.symboltracker.model.Stock;
-import com.thejessehelller.symboltracker.model.TimeSeries;
+import com.thejessehelller.symboltracker.model.DailyData;
 
 import java.util.List;
 
@@ -17,5 +17,5 @@ public interface StockDAO {
 
     int getIdBySymbol(String symbol);
 
-    boolean update(String symbol, TimeSeries ts);
+    boolean update(String symbol, DailyData ts);
 }

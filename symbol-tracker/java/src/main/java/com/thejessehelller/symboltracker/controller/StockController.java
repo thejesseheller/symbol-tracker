@@ -3,7 +3,7 @@ package com.thejessehelller.symboltracker.controller;
 import com.thejessehelller.symboltracker.dao.StockDAO;
 import com.thejessehelller.symboltracker.model.Stock;
 import com.thejessehelller.symboltracker.model.StockAlreadyExistsException;
-import com.thejessehelller.symboltracker.model.TimeSeries;
+import com.thejessehelller.symboltracker.model.DailyData;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,7 +39,7 @@ public class StockController {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(path = "stocks/{symbol}/update", method = RequestMethod.PUT)
-    public void updateStock(@RequestBody TimeSeries timeSeries, @PathVariable String symbol) {
-        stockDAO.update(symbol, timeSeries);
+    public void updateStock(@RequestBody DailyData dailyData, @PathVariable String symbol) {
+        stockDAO.update(symbol, dailyData);
     }
 }

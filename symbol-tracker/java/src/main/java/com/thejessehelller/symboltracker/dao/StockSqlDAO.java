@@ -1,7 +1,7 @@
 package com.thejessehelller.symboltracker.dao;
 
 import com.thejessehelller.symboltracker.model.Stock;
-import com.thejessehelller.symboltracker.model.TimeSeries;
+import com.thejessehelller.symboltracker.model.DailyData;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -73,7 +73,7 @@ public class StockSqlDAO implements StockDAO {
     }
 
     @Override
-    public boolean update(String symbol, TimeSeries ts) {
+    public boolean update(String symbol, DailyData ts) {
         int stockId = getIdBySymbol(symbol);
         String sql = "UPDATE stocks SET open = ?, high = ?, low = ?, close = ?, volume = ? WHERE stock_id = ?";
         return jdbcTemplate.update(sql, ts.getOpen(), ts.getHigh(), ts.getLow(), ts.getClose(), ts.getVolume(), stockId) == 1;
@@ -83,11 +83,11 @@ public class StockSqlDAO implements StockDAO {
         Stock stock = new Stock();
         stock.setId(rs.getInt("stock_id"));
         stock.setSymbol(rs.getString("symbol"));
-        stock.setPreviousOpen(rs.getString("open"));
-        stock.setPreviousHigh(rs.getString("high"));
-        stock.setPreviousLow(rs.getString("low"));
-        stock.setPreviousClose(rs.getString("close"));
-        stock.setPreviousVolume(rs.getString("volume"));
+        stock.setOpen(rs.getString("open"));
+        stock.setHigh(rs.getString("high"));
+        stock.setLow(rs.getString("low"));
+        stock.setClose(rs.getString("close"));
+        stock.setVolume(rs.getString("volume"));
         return stock;
     }
 }

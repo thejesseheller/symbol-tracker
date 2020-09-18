@@ -1,14 +1,23 @@
 package com.thejessehelller.symboltracker.model;
 
-public class TimeSeries {
+public class DailyData {
+    private String date;
     private String open;
     private String high;
     private String low;
     private String close;
     private String volume;
 
-    public TimeSeries() {
+    public DailyData() {
 
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getOpen() {
