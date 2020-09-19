@@ -11,11 +11,9 @@ public interface StockDAO {
 
     Stock findBySymbol(String symbol);
 
-//    boolean alreadyBeingTracked(String symbol);
-
     List<Stock> getAllBeingTracked();
 
     int getIdBySymbol(String symbol);
 
-    boolean update(String symbol, DailyData ts);
+    boolean remove(String symbol);
 }

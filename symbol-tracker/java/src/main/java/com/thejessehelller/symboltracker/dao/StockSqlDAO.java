@@ -1,7 +1,6 @@
 package com.thejessehelller.symboltracker.dao;
 
 import com.thejessehelller.symboltracker.model.Stock;
-import com.thejessehelller.symboltracker.model.DailyData;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -66,10 +65,9 @@ public class StockSqlDAO implements StockDAO {
     }
 
     @Override
-    public boolean update(String symbol, DailyData ts) {
-        int stockId = getIdBySymbol(symbol);
-        String sql = "UPDATE stocks SET open = ?, high = ?, low = ?, close = ?, volume = ? WHERE stock_id = ?";
-        return jdbcTemplate.update(sql, ts.getOpen(), ts.getHigh(), ts.getLow(), ts.getClose(), ts.getVolume(), stockId) == 1;
+    public boolean remove(String symbol) {
+        String sql = "UPDATE stocks SET currently_tracked = false WHERE symbol = ?";
+        return jdbcTemplate.update(sql, symbol) == 1;
     }
 
     private boolean alreadyBeingTracked(String symbol) {

@@ -27,9 +27,11 @@ public class StockController {
         // this needs to be rewritten because it's bad
         try {
             Stock stock = stockDAO.findBySymbol(symbol);
+            int neededId = stockDAO.getIdBySymbol(symbol);
+            dailyDataDAO.add(dailyData, neededId);
         } catch (Exception e) {
-            boolean testBool = stockDAO.add(symbol);
-            if (testBool) {
+            boolean newStockSymbolAdded = stockDAO.add(symbol);
+            if (newStockSymbolAdded) {
                 int neededId = stockDAO.getIdBySymbol(symbol);
                 dailyDataDAO.add(dailyData, neededId);
             }
@@ -52,5 +54,11 @@ public class StockController {
     @RequestMapping(path = "stocks/{symbol}/most-recent", method = RequestMethod.GET)
     public DailyData getMostRecent(@PathVariable String symbol) {
         return dailyDataDAO.getMostRecent(symbol);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(path = "/remove/{symbol}", method = RequestMethod.PUT)
+    public boolean stopTrackingStock(@PathVariable String symbol) {
+        return stockDAO.remove(symbol);
     }
 }
