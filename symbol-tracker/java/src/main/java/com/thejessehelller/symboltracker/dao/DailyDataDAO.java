@@ -5,4 +5,6 @@ import com.thejessehelller.symboltracker.model.DailyData;
 public interface DailyDataDAO {
 
     boolean add(DailyData data, int stockId);
+
+    DailyData getMostRecent(String symbol);
 }

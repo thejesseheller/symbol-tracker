@@ -15,16 +15,10 @@ export default {
       volume: data['5. volume']
     });
   },
-  // addMostRecentTimeSeries(symbol, timeSeries) {
-  //   return http.put(`stocks/${symbol}/update`, {      
-  //     open: timeSeries['1. open'],
-  //     high: timeSeries['2. high'],
-  //     low: timeSeries['3. low'],
-  //     close: timeSeries['4. close'],
-  //     volume: timeSeries['5. volume']
-  //   })
-  // },
   getAllStocks() {
     return http.get('stocks');
+  },
+  getMostRecentDailyData(symbol) {
+    return http.get(`stocks/${symbol}/most-recent`);
   }
 }

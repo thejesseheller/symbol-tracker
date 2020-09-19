@@ -1,8 +1,10 @@
 package com.thejessehelller.symboltracker.dao;
 
 import com.thejessehelller.symboltracker.model.DailyData;
+import com.thejessehelller.symboltracker.model.Stock;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Service;
 
 import java.sql.PreparedStatement;
@@ -40,6 +42,32 @@ public class DailyDataSqlDAO implements DailyDataDAO {
 
 
         return dataAdded;
+    }
+
+    @Override
+    public DailyData getMostRecent(String symbol) {
+        DailyData dd = new DailyData();
+        String sql = "SELECT date, open, high, low, close, volume FROM daily_data " +
+                     "INNER JOIN stocks ON daily_data.stock_id = stocks.stock_id " +
+                     "WHERE symbol = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, symbol);
+
+        if (results.next()){
+            dd = mapRowToDailyData(results);
+        }
+
+        return dd;
+    }
+
+    private DailyData mapRowToDailyData(SqlRowSet rs){
+        DailyData dd = new DailyData();
+        dd.setDate(rs.getString("date"));
+        dd.setOpen(rs.getString("open"));
+        dd.setHigh(rs.getString("high"));
+        dd.setLow(rs.getString("low"));
+        dd.setClose(rs.getString("close"));
+        dd.setVolume(rs.getString("volume"));
+        return dd;
     }
 
 }

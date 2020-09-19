@@ -41,10 +41,16 @@ public class StockController {
     public List<Stock> getAllTrackedStocks() {
         return stockDAO.getAllBeingTracked();
     }
+//
+//    @ResponseStatus(HttpStatus.NO_CONTENT)
+//    @RequestMapping(path = "stocks/{symbol}/update", method = RequestMethod.PUT)
+//    public void updateStock(@RequestBody DailyData dailyData, @PathVariable String symbol) {
+//        stockDAO.update(symbol, dailyData);
+//    }
 
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @RequestMapping(path = "stocks/{symbol}/update", method = RequestMethod.PUT)
-    public void updateStock(@RequestBody DailyData dailyData, @PathVariable String symbol) {
-        stockDAO.update(symbol, dailyData);
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(path = "stocks/{symbol}/most-recent", method = RequestMethod.GET)
+    public DailyData getMostRecent(@PathVariable String symbol) {
+        return dailyDataDAO.getMostRecent(symbol);
     }
 }

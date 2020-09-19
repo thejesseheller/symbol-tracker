@@ -3,8 +3,8 @@
     <h1>{{ msg }}</h1>
     <input type="text" v-model="symbol" placeholder="ENTER SYMBOL HERE"/>
     <!-- <button @click="saveSymbol">Add New Symbol</button> -->
-    <button @click="getMostRecentlyDailyTimeSeriesData">Display Most Recent Prices and Volume</button>
-      <div class="most-recent-daily-data">
+    <button @click="getMostRecentlyDailyTimeSeriesData" v-on:click="isHidden = false">Display Most Recent Prices and Volume</button>
+      <div class="most-recent-daily-data" v-if="!isHidden">
         <h2>{{ symbol }}</h2>
         <h3>{{ lastRefreshed }}</h3>
         <p>Open: {{mostRecentDailyData['1. open']}}</p>
@@ -14,7 +14,6 @@
         <p>Volume: {{mostRecentDailyData['5. volume']}}</p>
         <button @click="trackStock">Track this Stock</button>
       </div>     
-     
   </div>
 </template>
 
@@ -32,7 +31,8 @@ export default {
     return {
       symbol: '',
       lastRefreshed: '',
-      mostRecentDailyData: {}
+      mostRecentDailyData: {},
+      isHidden: true
     }
   },
   methods: {

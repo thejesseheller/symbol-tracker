@@ -4,13 +4,9 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-    trackedSymbols: []
+  state: {    
   },
-  mutations: {
-    SAVE_SYMBOL(state, symbol) {
-      state.trackedSymbols.push(symbol);
-    }
+  mutations: {    
   },
   actions: {
   },

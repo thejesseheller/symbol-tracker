@@ -50,7 +50,7 @@ public class StockSqlDAO implements StockDAO {
     @Override
     public List<Stock> getAllBeingTracked() {
         List<Stock> tracked = new ArrayList<>();
-        String sql = "SELECT * FROM stocks";
+        String sql = "SELECT * FROM stocks WHERE currently_tracked = true";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while (results.next()){

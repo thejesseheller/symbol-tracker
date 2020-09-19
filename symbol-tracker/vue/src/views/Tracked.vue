@@ -1,20 +1,20 @@
 <template>
   <div class="tracked">
-    <HelloWorld msg="Currently tracked stocks"/>
-    <Daily/>
+    <MainMessage msg="Currently tracked stocks"/>
+    <StockList/>
   </div>
 </template>
 
 <script>
 
-import HelloWorld from '@/components/HelloWorld.vue'
-import Daily from '@/components/Daily.vue'
+import MainMessage from '@/components/MainMessage.vue'
+import StockList from '@/components/StockList.vue'
 
 export default {
   name: 'Tracked',
   components: {
-    HelloWorld,
-    Daily
+    MainMessage,
+    StockList
   }
 }
 </script>
