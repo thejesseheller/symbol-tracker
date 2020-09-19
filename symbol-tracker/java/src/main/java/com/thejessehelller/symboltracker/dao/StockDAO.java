@@ -11,7 +11,7 @@ public interface StockDAO {
 
     Stock findBySymbol(String symbol);
 
-    boolean alreadyBeingTracked(String symbol);
+//    boolean alreadyBeingTracked(String symbol);
 
     List<Stock> getAllBeingTracked();
 

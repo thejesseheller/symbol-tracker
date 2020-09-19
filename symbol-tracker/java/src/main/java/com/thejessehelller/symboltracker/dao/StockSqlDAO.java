@@ -48,13 +48,6 @@ public class StockSqlDAO implements StockDAO {
     }
 
     @Override
-    public boolean alreadyBeingTracked(String symbol) {
-        String sql = "SELECT COUNT(*) FROM stocks WHERE symbol = ?";
-        int count = jdbcTemplate.queryForObject(sql, new Object[] {symbol}, Integer.class);
-        return count > 0;
-    }
-
-    @Override
     public List<Stock> getAllBeingTracked() {
         List<Stock> tracked = new ArrayList<>();
         String sql = "SELECT * FROM stocks";
@@ -79,15 +72,16 @@ public class StockSqlDAO implements StockDAO {
         return jdbcTemplate.update(sql, ts.getOpen(), ts.getHigh(), ts.getLow(), ts.getClose(), ts.getVolume(), stockId) == 1;
     }
 
+    private boolean alreadyBeingTracked(String symbol) {
+        String sql = "SELECT COUNT(*) FROM stocks WHERE symbol = ?";
+        int count = jdbcTemplate.queryForObject(sql, new Object[] {symbol}, Integer.class);
+        return count > 0;
+    }
+
     private Stock mapRowToStock(SqlRowSet rs){
         Stock stock = new Stock();
         stock.setId(rs.getInt("stock_id"));
         stock.setSymbol(rs.getString("symbol"));
-        stock.setOpen(rs.getString("open"));
-        stock.setHigh(rs.getString("high"));
-        stock.setLow(rs.getString("low"));
-        stock.setClose(rs.getString("close"));
-        stock.setVolume(rs.getString("volume"));
         return stock;
     }
 }

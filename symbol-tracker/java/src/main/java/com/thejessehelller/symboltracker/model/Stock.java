@@ -1,6 +1,7 @@
 package com.thejessehelller.symboltracker.model;
 
 public class Stock {
+
     private int id;
     private String symbol;
 

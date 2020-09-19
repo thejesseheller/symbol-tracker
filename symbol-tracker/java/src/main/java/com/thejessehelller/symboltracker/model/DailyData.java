@@ -1,6 +1,7 @@
 package com.thejessehelller.symboltracker.model;
 
 public class DailyData {
+
     private String date;
     private String open;
     private String high;

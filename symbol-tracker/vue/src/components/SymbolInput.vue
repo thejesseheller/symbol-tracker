@@ -12,7 +12,7 @@
         <p>Low: {{mostRecentDailyData['3. low']}}</p>
         <p>Close: {{mostRecentDailyData['4. close']}}</p>
         <p>Volume: {{mostRecentDailyData['5. volume']}}</p>
-        <button>Track this Stock</button>
+        <button @click="trackStock">Track this Stock</button>
       </div>     
      
   </div>
@@ -37,11 +37,8 @@ export default {
   },
   methods: {
     trackStock() {
-      DatabaseService.addSymbol(this.symbol);
-      // this.$store.commit('SAVE_SYMBOL', this.symbol);
-      // state resets every time the page is refreshed
-      // this.testArr = this.$store.state.trackedSymbols;
-      // alert(this.testArr.length)      
+      DatabaseService.addSymbolAndDailyData(this.symbol, this.lastRefreshed, this.mostRecentDailyData);
+           
     }, 
     getMostRecentlyDailyTimeSeriesData() {                  
       AlphaService.getMostRecentTimeSeries(this.symbol).then(response => {        

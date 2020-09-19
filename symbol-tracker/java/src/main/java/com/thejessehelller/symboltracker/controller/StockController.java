@@ -1,8 +1,8 @@
 package com.thejessehelller.symboltracker.controller;
 
+import com.thejessehelller.symboltracker.dao.DailyDataDAO;
 import com.thejessehelller.symboltracker.dao.StockDAO;
 import com.thejessehelller.symboltracker.model.Stock;
-import com.thejessehelller.symboltracker.model.StockAlreadyExistsException;
 import com.thejessehelller.symboltracker.model.DailyData;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,26 +14,31 @@ import java.util.List;
 public class StockController {
 
     private StockDAO stockDAO;
+    private DailyDataDAO dailyDataDAO;
 
-    public StockController(StockDAO stockDAO) {
+    public StockController(StockDAO stockDAO, DailyDataDAO dailyDataDAO) {
         this.stockDAO = stockDAO;
+        this.dailyDataDAO = dailyDataDAO;
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/add/{symbol}", method = RequestMethod.POST)
-    public void addStock(@PathVariable String symbol) {
+    public void addStock(@PathVariable String symbol, @RequestBody DailyData dailyData) {
+        // this needs to be rewritten because it's bad
         try {
             Stock stock = stockDAO.findBySymbol(symbol);
-            throw new StockAlreadyExistsException();
         } catch (Exception e) {
-            stockDAO.add(symbol);
+            boolean testBool = stockDAO.add(symbol);
+            if (testBool) {
+                int neededId = stockDAO.getIdBySymbol(symbol);
+                dailyDataDAO.add(dailyData, neededId);
+            }
         }
     }
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "stocks", method = RequestMethod.GET)
     public List<Stock> getAllTrackedStocks() {
-        System.out.println("Working");
         return stockDAO.getAllBeingTracked();
     }
 
