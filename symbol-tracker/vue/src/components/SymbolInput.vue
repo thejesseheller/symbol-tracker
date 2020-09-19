@@ -37,8 +37,7 @@ export default {
   },
   methods: {
     trackStock() {
-      DatabaseService.addSymbolAndDailyData(this.symbol, this.lastRefreshed, this.mostRecentDailyData);
-           
+      DatabaseService.addSymbolAndDailyData(this.symbol, this.lastRefreshed, this.mostRecentDailyData);           
     }, 
     getMostRecentlyDailyTimeSeriesData() {                  
       AlphaService.getMostRecentTimeSeries(this.symbol).then(response => {        
