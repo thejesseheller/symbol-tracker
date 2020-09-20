@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="top">
     <h1>{{ msg }}</h1>
   </div>
 </template>
@@ -15,6 +15,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@700&display=swap');
+
+h1 {
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
 h3 {
   margin: 40px 0 0;
 }

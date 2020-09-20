@@ -1,5 +1,5 @@
 <template>
-  <div class="top">
+  <div class="solo">
     <StockCard />    
   </div>
 </template>

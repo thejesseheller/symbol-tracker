@@ -1,7 +1,7 @@
 <template>
-  <div class="symbol">
+  <div class="top">
     <h1>{{ msg }}</h1>
-    <input type="text" v-model="symbol" placeholder="ENTER SYMBOL HERE"/>
+    <input type="text" v-model="symbol" placeholder="Enter symbol here"/>
     <!-- <button @click="saveSymbol">Add New Symbol</button> -->
     <button @click="getMostRecentlyDailyTimeSeriesData" v-on:click="isHidden = false">Display Most Recent Prices and Volume</button>
       <div class="most-recent-daily-data" v-if="!isHidden">

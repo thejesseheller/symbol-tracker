@@ -20,7 +20,7 @@ export default {
   },
   getMostRecentDailyData(symbol) {
     return http.get(`stocks/${symbol}/most-recent`);
-  }
+  },
   stopTrackingStock(symbol) {
     return http.put(`remove/${symbol}`, symbol);
   }

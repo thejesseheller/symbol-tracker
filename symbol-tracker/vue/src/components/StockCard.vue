@@ -16,6 +16,9 @@
       <p>Low: {{ intradayData['3. low'] }}</p>
       <p>Close: {{ intradayData['4. close'] }}</p>
       <p>Volume: {{ intradayData['5. volume'] }}</p>
+    </div>
+    <div class="news-stories" v-for="story in stories" :key="story.id">
+       <a v-bind:href="story.url" target="_blank">{{ story.title }}</a>            
     </div>           
   </div>
 </template>
@@ -23,6 +26,7 @@
 <script>
 import DatabaseService from '@/services/DatabaseService';
 import AlphaService from '@/services/AlphaService';
+import NewsService from '@/services/NewsService';
 
 export default {
   name: 'StockCard',
@@ -31,7 +35,8 @@ export default {
      symbol: '',
      lastRefreshed: '',
      historicData: {},
-     intradayData: {}
+     intradayData: {},
+     stories: []
     }
   },
   methods: {
@@ -45,12 +50,18 @@ export default {
         this.lastRefreshed = response.data['Meta Data']['3. Last Refreshed'];
         this.intradayData = response.data['Time Series (60min)'][this.lastRefreshed];
       });
+    },
+    getNews() {
+      NewsService.getNews(this.symbol).then(response => {
+        this.stories = response.data["articles"];
+      })
     }
   },
   created() {
     this.symbol = this.$route.params.symbol;
     this.getDailyData();
     this.getIntradayData();
+    this.getNews();
   }
 }
 </script>

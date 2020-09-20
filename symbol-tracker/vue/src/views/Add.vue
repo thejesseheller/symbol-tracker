@@ -1,6 +1,6 @@
 <template>
   <div class="add">
-    <SymbolInput msg="Enter ticker symbol"/>    
+    <SymbolInput msg="Enter a ticker symbol to get started"/>    
   </div>
 </template>
 
