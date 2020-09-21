@@ -1,6 +1,6 @@
 <template>
   <div class="add">
-    <SymbolInput msg="Enter a ticker symbol to get started"/>    
+    <symbol-input msg="Enter a ticker symbol to get started"/>    
   </div>
 </template>
 
@@ -16,3 +16,14 @@ export default {
   
 }
 </script>
+
+<style>
+
+.add {
+  /* background-color: #1A1A1D; */
+  background-color: #1B1B1D;  
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+</style>

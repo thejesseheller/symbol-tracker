@@ -1,6 +1,6 @@
 <template>
   <div class="solo">
-    <StockCard />    
+    <stock-card />    
   </div>
 </template>
 
@@ -13,10 +13,17 @@ export default {
   components: {
     StockCard
   }
-
 }
 </script>
 
-<style>
+<style scoped>
+
+.solo {
+  /* background-color: #1A1A1D; */
+  background-color: #1B1B1D;  
+  min-height: 100vh;
+  min-width: 100vw;
+  color: white;
+}
 
 </style>
