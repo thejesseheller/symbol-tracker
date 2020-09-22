@@ -1,40 +1,44 @@
 <template>
-  <div class="home">    
-    <div class="content">
-      <h1 id="home-heading">Symbol Watcher</h1>
-    </div>   
+  <div class="wrapper">
+    <parallax class="section page-header header-filter" :style="headerStyle">
+      <div class="container">
+        <div class="md-layout">
+          <div
+            class="md-layout-item md-size-50 md-small-size-70 md-xsmall-size-100"
+          >
+            <h1 class="title">symbol.watcher</h1>
+            <h4>
+              flavor text
+            </h4>
+            <br />
+            <md-button
+              href="http://localhost:8081/#/lookup"
+              class="md-info md-regular"
+              target="_blank"
+              ><i class="fas fa-play"></i> Get Started</md-button
+            >
+          </div>
+        </div>
+      </div>
+    </parallax>    
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 export default {
-  name: 'Home'
-}
+  bodyClass: "home-page",
+  props: {
+    header: {
+      type: String,
+      default: require("@/assets/img/lando.jpg")
+    }
+  },  
+  computed: {
+    headerStyle() {
+      return {
+        backgroundImage: `url(${this.header})`
+      };
+    }
+  }
+};
 </script>
-
-<style>
-
-.home {
-  min-height: 100vh;
-  min-width: 98vw;
-  display: flex;  
-  align-items: center;
-  justify-content: center;   
-  background-image: url(../assets/background.jpg);
-  background-repeat:no-repeat;
-  background-size: cover;
-}
-
-#home-heading {      
-  font-size: 5rem;
-  text-transform: uppercase;
-  color: white;
-  text-shadow:
-  -1px -1px 0 #000,
-  1px -1px 0 #000,
-  -1px 1px 0 #000,
-  1px 1px 0 #000;
-}
-
-</style>

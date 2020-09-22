@@ -23,5 +23,16 @@ export default {
   },
   stopTrackingStock(symbol) {
     return http.put(`remove/${symbol}`, symbol);
+  },
+  restartTracking(symbol) {
+    return http.put(`/stocks/${symbol}`);
+  },
+  getSingleStock(symbol) {
+    return http.get(`stocks/${symbol}`);
+  },
+  addName(symbol, stock) {
+    return http.put(`stocks/${symbol}/add-name`, {      
+      companyName: stock.companyName
+    });
   }
 }

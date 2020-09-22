@@ -15,10 +15,7 @@
           class="md-just-icon md-simple md-toolbar-toggle"
           :class="{ toggled: toggledClass }"
           @click="toggleNavbarMobile()"
-        >
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
+        >          
         </md-button>
 
         <div class="md-collapse">
@@ -27,99 +24,54 @@
               <!-- Here you can add your items from the section-start of your toolbar -->
             </mobile-menu>
             <md-list>
-              <li class="md-list-item" v-if="!showDownload">
+              <li class="md-list-item">
                 <a
                   href="javascript:void(0)"
-                  class="md-list-item-router md-list-item-container md-button-clean dropdown"
+                  class="md-list-item-router md-list-item-container"
                 >
-                  <div class="md-list-item-content">
-                    <drop-down direction="down">
-                      <md-button
-                        slot="title"
-                        class="md-button md-button-link md-white md-simple dropdown-toggle"
-                        data-toggle="dropdown"
+                  <div class="md-list-item-content">                    
+                      <md-button                        
+                        class="md-button md-button-link md-white md-simple "
+                        href="#/home"                        
                       >
-                        <i class="material-icons">apps</i>
-                        <p>Components</p>
+                        <i class="material-icons">crop</i>
+                        <p>Home</p>
                       </md-button>
-                      <ul class="dropdown-menu dropdown-with-icons">
-                        <li>
-                          <a href="#/">
-                            <i class="material-icons">layers</i>
-                            <p>All Components</p>
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="https://demos.creative-tim.com/vue-material-kit/documentation/"
-                          >
-                            <i class="material-icons">content_paste</i>
-                            <p>Documentation</p>
-                          </a>
-                        </li>
-                      </ul>
-                    </drop-down>
                   </div>
                 </a>
               </li>
-
-              <md-list-item
-                href="https://demos.creative-tim.com/vue-material-kit/documentation/"
-                target="_blank"
-                v-if="showDownload"
-              >
-                <i class="material-icons">content_paste</i>
-                <p>Documentation</p>
-              </md-list-item>
-
-              <md-list-item
-                href="javascript:void(0)"
-                @click="scrollToElement()"
-                v-if="showDownload"
-              >
-                <i class="material-icons">cloud_download</i>
-                <p>Download</p>
-              </md-list-item>
-
-              <li class="md-list-item" v-else>
+              <li class="md-list-item">
                 <a
                   href="javascript:void(0)"
-                  class="md-list-item-router md-list-item-container md-button-clean dropdown"
+                  class="md-list-item-router"
                 >
-                  <div class="md-list-item-content">
-                    <drop-down direction="down">
-                      <md-button
-                        slot="title"
-                        class="md-button md-button-link md-white md-simple dropdown-toggle"
-                        data-toggle="dropdown"
+                  <div class="md-list-item-content">                    
+                      <md-button                        
+                        class="md-button md-button-link md-white md-simple "
+                        href="#/lookup"                        
                       >
                         <i class="material-icons">view_carousel</i>
-                        <p>Examples</p>
+                        <p>Lookup</p>
                       </md-button>
-                      <ul class="dropdown-menu dropdown-with-icons">
-                        <li>
-                          <a href="#/landing">
-                            <i class="material-icons">view_day</i>
-                            <p>Landing Page</p>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#/login">
-                            <i class="material-icons">fingerprint</i>
-                            <p>Login Page</p>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#/profile">
-                            <i class="material-icons">account_circle</i>
-                            <p>Profile Page</p>
-                          </a>
-                        </li>
-                      </ul>
-                    </drop-down>
+                      <li class="md-list-item">
+                <a
+                  href="javascript:void(0)"
+                  class="md-list-item-router"
+                >
+                  <div class="md-list-item-content">                    
+                      <md-button                        
+                        class="md-button md-button-link md-white md-simple"
+                        href="#/watchlist"
+                      >
+                        <i class="material-icons">apps</i>
+                        <p>Watchlist</p>
+                      </md-button>                   
                   </div>
                 </a>
               </li>
+                  </div>
+                </a>
+              </li>              
             </md-list>
           </div>
         </div>
@@ -136,7 +88,6 @@ function resizeThrottler(actualResizeHandler) {
     resizeTimeout = setTimeout(() => {
       resizeTimeout = null;
       actualResizeHandler();
-
       // The actualResizeHandler will execute at a rate of 15fps
     }, 66);
   }
