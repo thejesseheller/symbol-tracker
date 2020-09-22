@@ -24,11 +24,9 @@ public class StockController {
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/add/{symbol}", method = RequestMethod.POST)
     public void addStock(@PathVariable String symbol, @RequestBody DailyData dailyData) {
-        // this needs to be rewritten because it's bad
+        
         try {
             Stock stock = stockDAO.findBySymbol(symbol);
-            int neededId = stockDAO.getIdBySymbol(symbol);
-            dailyDataDAO.add(dailyData, neededId);
         } catch (Exception e) {
             boolean newStockSymbolAdded = stockDAO.add(symbol);
             if (newStockSymbolAdded) {
@@ -42,6 +40,18 @@ public class StockController {
     @RequestMapping(path = "stocks", method = RequestMethod.GET)
     public List<Stock> getAllTrackedStocks() {
         return stockDAO.getAllBeingTracked();
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(path = "stocks/{symbol}", method = RequestMethod.GET)
+    public Stock getSingleStock(@PathVariable String symbol) {
+        Stock stock = new Stock();
+        try {
+            stock = stockDAO.findBySymbol(symbol);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return stock;
     }
 //
 //    @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -59,6 +69,24 @@ public class StockController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(path = "/remove/{symbol}", method = RequestMethod.PUT)
     public boolean stopTrackingStock(@PathVariable String symbol) {
-        return stockDAO.remove(symbol);
+        Stock stock = stockDAO.findBySymbol(symbol);
+        return stockDAO.remove(stock);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(path = "/stocks/{symbol}", method = RequestMethod.PUT)
+    public boolean restartTracking(@PathVariable String symbol) {
+        Stock stock = stockDAO.findBySymbol(symbol);
+        return stockDAO.startTrackingAgain(stock);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(path = "stocks/{symbol}/add-name", method = RequestMethod.PUT)
+    public boolean addCompanyName(@PathVariable String symbol, @RequestBody Stock stock) {
+        System.out.println("Working.");
+        Stock toBeUpdated = stockDAO.findBySymbol(symbol);
+        toBeUpdated.setCompanyName(stock.getCompanyName());
+        toBeUpdated.setId(stockDAO.getIdBySymbol(symbol));
+        return stockDAO.addName(toBeUpdated);
     }
 }

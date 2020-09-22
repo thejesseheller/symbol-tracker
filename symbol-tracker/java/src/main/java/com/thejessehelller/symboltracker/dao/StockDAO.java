@@ -15,5 +15,9 @@ public interface StockDAO {
 
     int getIdBySymbol(String symbol);
 
-    boolean remove(String symbol);
+    boolean startTrackingAgain(Stock stock);
+
+    boolean remove(Stock stock);
+
+    boolean addName(Stock stock);
 }

@@ -20,6 +20,7 @@ CREATE SEQUENCE seq_dd_id
 CREATE TABLE stocks (
         stock_id int DEFAULT nextval('seq_stock_id'::regclass) NOT NULL,
         symbol varChar(12) not null,
+        company_name varChar(64),
         currently_tracked boolean default true,
         CONSTRAINT PK_stock PRIMARY KEY (stock_id)
 );

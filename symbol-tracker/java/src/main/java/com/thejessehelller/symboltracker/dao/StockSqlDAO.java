@@ -43,7 +43,14 @@ public class StockSqlDAO implements StockDAO {
 
     @Override
     public Stock findBySymbol(String symbol) {
-        return jdbcTemplate.queryForObject("SELECT * FROM stocks WHERE symbol = ?", Stock.class, symbol);
+        Stock stock = new Stock();
+        String sql = "SELECT * FROM stocks WHERE symbol = ?";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, symbol);
+        if (results.next()) {
+            stock = mapRowToStock(results);
+        }
+        return stock;
     }
 
     @Override
@@ -65,9 +72,21 @@ public class StockSqlDAO implements StockDAO {
     }
 
     @Override
-    public boolean remove(String symbol) {
+    public boolean remove(Stock stock) {
         String sql = "UPDATE stocks SET currently_tracked = false WHERE symbol = ?";
-        return jdbcTemplate.update(sql, symbol) == 1;
+        return jdbcTemplate.update(sql, stock.getSymbol()) == 1;
+    }
+
+    @Override
+    public boolean startTrackingAgain(Stock stock) {
+        String sql = "UPDATE stocks SET currently_tracked = true WHERE symbol = ?";
+        return jdbcTemplate.update(sql, stock.getSymbol()) == 1;
+    }
+
+    @Override
+    public boolean addName(Stock stock) {
+        String sql = "UPDATE stocks SET company_name = ? WHERE stock_id = ?";
+        return jdbcTemplate.update(sql, stock.getCompanyName(), stock.getId()) == 1;
     }
 
     private boolean alreadyBeingTracked(String symbol) {
@@ -80,6 +99,7 @@ public class StockSqlDAO implements StockDAO {
         Stock stock = new Stock();
         stock.setId(rs.getInt("stock_id"));
         stock.setSymbol(rs.getString("symbol"));
+        stock.setCompanyName(rs.getString("company_name"));
         return stock;
     }
 }
