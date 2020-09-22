@@ -8,12 +8,12 @@
           >
             <h1 class="title">symbol.watcher</h1>
             <h4>
-              flavor text
+              Losing money together
             </h4>
             <br />
             <md-button
               href="http://localhost:8081/#/lookup"
-              class="md-info md-regular"
+              class="md-warning md-regular"
               target="_blank"
               ><i class="fas fa-play"></i> Get Started</md-button
             >

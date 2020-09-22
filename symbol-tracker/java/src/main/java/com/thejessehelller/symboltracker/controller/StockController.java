@@ -53,12 +53,6 @@ public class StockController {
         }
         return stock;
     }
-//
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    @RequestMapping(path = "stocks/{symbol}/update", method = RequestMethod.PUT)
-//    public void updateStock(@RequestBody DailyData dailyData, @PathVariable String symbol) {
-//        stockDAO.update(symbol, dailyData);
-//    }
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path = "stocks/{symbol}/most-recent", method = RequestMethod.GET)
@@ -83,7 +77,6 @@ public class StockController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(path = "stocks/{symbol}/add-name", method = RequestMethod.PUT)
     public boolean addCompanyName(@PathVariable String symbol, @RequestBody Stock stock) {
-        System.out.println("Working.");
         Stock toBeUpdated = stockDAO.findBySymbol(symbol);
         toBeUpdated.setCompanyName(stock.getCompanyName());
         toBeUpdated.setId(stockDAO.getIdBySymbol(symbol));

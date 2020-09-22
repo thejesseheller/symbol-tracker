@@ -1,7 +1,6 @@
 package com.thejessehelller.symboltracker.dao;
 
 import com.thejessehelller.symboltracker.model.Stock;
-import com.thejessehelller.symboltracker.model.DailyData;
 
 import java.util.List;
 

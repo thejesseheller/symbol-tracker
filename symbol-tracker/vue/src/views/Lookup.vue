@@ -8,10 +8,10 @@
           >
             <login-card header-color="info">
               <h4 slot="title" class="card-title">Enter a ticker symbol below</h4>
-              <p slot="description" class="description">Or don't idc</p>
+              <!-- <p slot="description" class="description">Or don't idc</p> -->
               <md-field class="md-form-group has-danger" slot="inputs">
                 <md-icon>sync</md-icon>
-                <label>Symbol...</label>
+                <label>Symbol</label>
                 <md-input v-model="symbol"></md-input>                
               </md-field>
               <md-button slot="footer" class="md-simple md-info md-lg" @click="getMostRecentlyDailyTimeSeriesData(symbol); classicModal = true">
@@ -20,7 +20,7 @@
             </login-card>
             <modal v-if="classicModal" @close="classicModalHide">
               <template slot="header">
-                <h4 class="modal-title">{{ symbol }}</h4>                  
+                <h3 class="modal-title">{{ symbol }}</h3>                  
                 <md-button
                  class="md-simple md-just-icon md-round modal-default-button"
                  @click="classicModalHide"
@@ -28,7 +28,6 @@
                 <md-icon>clear</md-icon>
                 </md-button>
               </template>
-
                 <template slot="body">
                   <h5>{{ lastRefreshed }}</h5>
                   <p>Open: {{mostRecentDailyData['1. open']}}</p>
@@ -37,11 +36,10 @@
                   <p>Close: {{mostRecentDailyData['4. close']}}</p>
                   <p>Volume: {{mostRecentDailyData['5. volume']}}</p>                  
                 </template>
-
                 <template slot="footer">                  
-                  <md-button class="md-info md-simple" @click="getSingleStock">Track</md-button>
+                  <md-button class="md-info md-simple md-lg" @click="getSingleStock">Track</md-button>
                   <md-button
-                    class="md-danger md-simple"
+                    class="md-danger md-simple md-lg"
                     @click="classicModalHide"
                     >Close</md-button
                   >
@@ -77,7 +75,7 @@ export default {
   props: {
     header: {
       type: String,
-      default: require("@/assets/img/stonks.jpg")
+      default: require("@/assets/img/abstract.jpg")
     }
   },
   methods: {

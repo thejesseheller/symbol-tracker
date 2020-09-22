@@ -1,7 +1,6 @@
 package com.thejessehelller.symboltracker.dao;
 
 import com.thejessehelller.symboltracker.model.DailyData;
-import com.thejessehelller.symboltracker.model.Stock;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
